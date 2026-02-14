@@ -8,13 +8,25 @@ const connectDB = async () => {
     
     await client.connect();
     
-    db = client.db();
+    db = client.db('Ecom');
     
     // Verify connection
     await db.admin().ping();
     
     console.log(`MongoDB Connected Successfully`);
     console.log(`Database Name: ${db.name}`);
+
+     
+    
+
+     const collection = db.collection("Products");
+     const result = await collection.find().toArray();
+     console.log(result);
+
+
+
+
+
     
     return db;
   } catch (error) {
@@ -26,3 +38,5 @@ const connectDB = async () => {
 const getDB = () => db;
 
 module.exports = { connectDB, getDB };
+
+//tora
