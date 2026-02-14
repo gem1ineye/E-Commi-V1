@@ -1,44 +1,35 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const { connectDB } = require('./config/database');
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const {connectDB,getDB} = require("./config/database");
 
+// Load environment variables
+dotenv.config();
+
+// Initialize Express app
 const app = express();
 
 // Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(cors()); // Enable CORS
+app.use(express.json()); // Parse JSON bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
-// Routes
-// app.use('/api/users', require('./routes/users'));
-// Add more routes here
+// Connect to Database
+connectDB();
 
-// Basic test route
-app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to E-Commi API' });
+// Test route
+app.get("/", (req, res) => {
+  res.json({
+    message: "MERN E-Commerce API is running!",
+    status: "success",
+  });
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Something went wrong!', error: err.message });
-});
-
+// Set port
 const PORT = process.env.PORT || 5000;
 
-// Connect to MongoDB and start server
-const startServer = async () => {
-  try {
-    await connectDB();
-    
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-  } catch (error) {
-    console.error('Failed to start server:', error.message);
-    process.exit(1);
-  }
-};
-
-startServer();
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV}`);
+});
