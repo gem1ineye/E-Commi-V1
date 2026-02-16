@@ -1,32 +1,15 @@
-const { MongoClient } = require("mongodb");
+const mongoose = require("mongoose");
 
 let db;
 
 const connectDB = async () => {
   try {
-    const client = new MongoClient(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI);
     
-    await client.connect();
-    
-    db = client.db('Ecom');
-    
-    // Verify connection
-    await db.admin().ping();
+    db = mongoose.connection;
     
     console.log(`MongoDB Connected Successfully`);
     console.log(`Database Name: ${db.name}`);
-
-     
-    
-
-     const collection = db.collection("Products");
-     const result = await collection.find().toArray();
-     console.log(result);
-
-
-
-
-
     
     return db;
   } catch (error) {
@@ -38,5 +21,3 @@ const connectDB = async () => {
 const getDB = () => db;
 
 module.exports = { connectDB, getDB };
-
-//tora

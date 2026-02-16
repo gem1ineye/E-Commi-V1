@@ -4,7 +4,8 @@ const orderSchema = new mongoose.Schema({
   orderNumber: {
     type: String,
     unique: true,
-    required: true
+    required: false,
+    sparse: true
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -123,13 +124,12 @@ orderSchema.index({ status: 1 });
 orderSchema.index({ createdAt: -1 });
 
 // Auto-generate order number before saving
-orderSchema.pre('save', async function(next) {
+orderSchema.pre('save', async function() {
   if (!this.orderNumber) {
     const timestamp = Date.now().toString();
     const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
     this.orderNumber = `ORD-${timestamp}-${random}`;
   }
-  next();
 });
 
 const Order = mongoose.model('Order', orderSchema);

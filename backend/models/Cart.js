@@ -37,9 +37,8 @@ const cartSchema = new mongoose.Schema({
 });
 
 // Update lastUpdated on every save
-cartSchema.pre('save', function(next) {
+cartSchema.pre('save', async function() {
   this.lastUpdated = Date.now();
-  next();
 });
 
 // Index on user for fast lookups
