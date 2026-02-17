@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@heroui/dropdown": "^2.3.31",
+    "@tabler/icons-react": "^3.36.1",
+    "clsx": "^2.1.1",
+    "motion": "^12.34.0",
+    "tailwind-merge": "^3.4.1"
+  }
+}
