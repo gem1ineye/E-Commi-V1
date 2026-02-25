@@ -5,6 +5,7 @@ const { connectDB } = require('./config/database');
 // const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
+const uploadRoutes = require('./routes/uploadRoutes');
 
 // Load environment variables
 dotenv.config();
@@ -16,13 +17,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static('uploads'));
 
 // Connect to Database
 connectDB();
 
 // Test route
 app.get('/', (req, res) => {
-  res.json({ 
+  res.json({
     message: 'MERN E-Commerce API is running!',
     status: 'success'
   });
@@ -32,6 +34,7 @@ app.get('/', (req, res) => {
 // app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/upload', uploadRoutes);
 
 // Set port
 const PORT = process.env.PORT || 5000;

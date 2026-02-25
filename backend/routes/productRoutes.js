@@ -6,7 +6,8 @@ const {
   createProduct,
   updateProduct,
   deleteProduct,
-  searchProducts
+  searchProducts,
+  getProductReviews
 } = require('../controllers/productController');
 
 // Public routes
@@ -25,6 +26,11 @@ router.get('/', getAllProducts);
 // @desc    Get single product
 // @access  Public
 router.get('/:id', getProductById);
+
+// @route   GET /api/products/:id/reviews
+// @desc    Get product reviews
+// @access  Public
+router.get('/:id/reviews', getProductReviews);
 
 // Admin routes (will add auth middleware later)
 

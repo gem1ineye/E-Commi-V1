@@ -136,7 +136,11 @@ const createProduct = async (req, res) => {
       specifications,
       tags,
       isFeatured,
+      images,
     } = req.body;
+
+    console.log('--- CREATE PRODUCT DEBUG ---');
+    console.log('Images received:', JSON.stringify(images, null, 2));
 
     // Check if category exists
     const categoryExists = await Category.findById(category);
@@ -162,6 +166,7 @@ const createProduct = async (req, res) => {
       specifications,
       tags,
       isFeatured,
+      images,
     });
 
     // Populate category before sending response
@@ -210,7 +215,11 @@ const updateProduct = async (req, res) => {
       tags,
       isFeatured,
       isActive,
+      images,
     } = req.body;
+
+    console.log('--- UPDATE PRODUCT DEBUG ---');
+    console.log('Images received:', JSON.stringify(images, null, 2));
 
     // Find product
     let product = await Product.findById(req.params.id);
@@ -251,6 +260,7 @@ const updateProduct = async (req, res) => {
         tags,
         isFeatured,
         isActive,
+        images,
       },
       {
         new: true, // Return updated document
@@ -358,6 +368,33 @@ const searchProducts = async (req, res) => {
   }
 };
 
+// @desc    Get product reviews
+// @route   GET /api/products/:id/reviews
+// @access  Public
+const getProductReviews = async (req, res) => {
+  try {
+    const Review = require("../models/Review");
+    const reviews = await Review.find({
+      product: req.params.id,
+      status: 'approved'
+    })
+      .populate("user", "name avatar")
+      .sort("-createdAt");
+
+    res.status(200).json({
+      success: true,
+      count: reviews.length,
+      reviews,
+    });
+  } catch (error) {
+    console.error("Get Reviews Error:", error);
+    res.status(500).json({
+      success: false,
+      error: "Server error while fetching reviews",
+    });
+  }
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
@@ -365,4 +402,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   searchProducts,
+  getProductReviews,
 };
