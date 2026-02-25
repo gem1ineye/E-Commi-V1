@@ -1,12 +1,12 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: 'http://localhost:3001/api', // Backend base URL
-    timeout: 10000,
-    headers: {
-        'Content-Type': 'application/json'
-    }
-})
+  baseURL: "https://e-commi-v1.onrender.com", // Backend base URL
+  timeout: 10000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 // Request interceptor for adding auth token
 api.interceptors.request.use(
