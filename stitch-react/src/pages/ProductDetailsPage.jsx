@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import api from '../utils/axiosConfig'
 import toast from 'react-hot-toast'
+import { formatPrice } from '../utils/formatCurrency'
 
 export default function ProductDetailsPage() {
     const { id } = useParams()
@@ -162,12 +163,12 @@ export default function ProductDetailsPage() {
 
                             <div className="flex items-baseline gap-3 mb-8">
                                 <span className="text-4xl font-black text-slate-900 dark:text-white">
-                                    ${product.price?.toFixed(2)}
+                                    {formatPrice(product.price)}
                                 </span>
                                 {product.compareAtPrice > product.price && (
                                     <>
                                         <span className="text-xl text-slate-400 line-through">
-                                            ${product.compareAtPrice?.toFixed(2)}
+                                            {formatPrice(product.compareAtPrice)}
                                         </span>
                                         <span className="text-red-500 font-bold">
                                             {Math.round((1 - product.price / product.compareAtPrice) * 100)}% OFF
@@ -227,7 +228,7 @@ export default function ProductDetailsPage() {
                         <div className="border-t border-slate-100 dark:border-gray-800 pt-6 space-y-3">
                             <div className="flex items-center gap-3 text-sm text-slate-600 dark:text-gray-400">
                                 <span className="material-symbols-outlined text-green-500" style={{ fontSize: '20px' }}>local_shipping</span>
-                                Free shipping on orders over $50
+                                Free shipping on orders over ₹500
                             </div>
                             <div className="flex items-center gap-3 text-sm text-slate-600 dark:text-gray-400">
                                 <span className="material-symbols-outlined text-blue-500" style={{ fontSize: '20px' }}>verified</span>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import AdminSidebar from '../components/AdminSidebar'
 import api from '../utils/axiosConfig'
 import toast from 'react-hot-toast'
+import { formatPrice } from '../utils/formatCurrency'
 
 function StatusBadge({ status, isActive }) {
     if (!isActive) return (
@@ -273,7 +274,7 @@ export default function AdminProductManagementPage() {
                                                     <td className="px-6 py-4">
                                                         <span className="bg-slate-100 dark:bg-gray-800 text-slate-700 dark:text-gray-300 text-xs font-medium px-2.5 py-1 rounded-full">{p.category?.name || 'Uncategorized'}</span>
                                                     </td>
-                                                    <td className="px-6 py-4 font-semibold text-slate-900 dark:text-white">${p.price.toFixed(2)}</td>
+                                                    <td className="px-6 py-4 font-semibold text-slate-900 dark:text-white">{formatPrice(p.price)}</td>
                                                     <td className="px-6 py-4">
                                                         <span className={`font-semibold ${p.stock === 0 ? 'text-red-600' : 'text-slate-900 dark:text-white'}`}>
                                                             {p.stock}
@@ -328,12 +329,12 @@ export default function AdminProductManagementPage() {
                                     <textarea required name="description" value={formData.description} onChange={handleInputChange} rows="3" className="w-full rounded-xl border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-800 p-3.5 focus:ring-2 focus:ring-primary resize-none" placeholder="Provide a detailed description"></textarea>
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-bold mb-2">Price ($)*</label>
+                                    <label className="block text-sm font-bold mb-2">Price (₹)*</label>
                                     <input required type="number" name="price" value={formData.price} onChange={handleInputChange} className="w-full rounded-xl border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-800 p-3.5 focus:ring-1 focus:ring-primary" placeholder="0.00" />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-bold mb-2">Compare At Price ($)</label>
-                                    <input type="number" name="compareAtPrice" value={formData.compareAtPrice} onChange={handleInputChange} className="w-full rounded-xl border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-800 p-3.5 focus:ring-1 focus:ring-primary" placeholder="0.00" />
+                                    <label className="block text-sm font-bold mb-2">Compare At Price (₹)</label>
+                                    <input type="number" name="compareAtPrice" value={formData.compareAtPrice} onChange={handleInputChange} className="w-full rounded-xl border-slate-200 dark:border-gray-800 bg-slate-50 dark:bg-gray-800 p-3.5 focus:ring-1 focus:ring-primary" placeholder="0.00" />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-bold mb-2">Category*</label>

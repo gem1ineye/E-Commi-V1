@@ -11,8 +11,8 @@ const trackingSteps = [
 ]
 
 const orderItems = [
-    { name: 'Wireless Noise Cancelling Headphones', variant: 'Black · Qty: 1', price: '$199.99', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuANVj4nYJmsxmerLDeUZh1bvJxcRCO5NYI4aXoQ70eTDA1ZfGMc9TB5X4etAox_ucWQIGdQnE_-Dx9-QSEflwG0JhTBVapy2iT_-ukCg6bDo9e_ojR9_2rn8BwgApjBq6s67UDckczaWF_3OrtOronvC3Tl2OsUNhK-ywOTUxqyusWQGoNS9em25qRXRuAo6o2GAt0yhUIBAKWCW0_dM4eiKnJttjKwkCZtS_rJLlXLNev1ootYOycNkq_NM6BBrzQjplPsxhXlOX4' },
-    { name: 'Pro Runner Sneakers', variant: 'Red · Size 10 · Qty: 1', price: '$89.99', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBacVAPb_4ZPHiuym3FCz5A_RZYoLESVSJXNe-nO4eUqg7fuycfpJd8NsZfMeQRQq7th_GXGJ0bym_doREtWSTe8UZcV-p2n9cIl2-EtlJsRcJkkqISgr-LcJYfmVRf61Pn9lXgV15oM37PaMtTyJBc-XFSsSCY-jIQyesA4meSCS-84Tsh_tA9ZTkMW0aFMJj9ITrNyGIwdjJBjGo8ztuqX5svp9ETpDNTGyBPq1ZoziFgbW3VKoslXQH3IIfRGv-GfGJirj-v9Fo' },
+    { name: 'Wireless Noise Cancelling Headphones', variant: 'Black · Qty: 1', price: '₹14,999.00', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuANVj4nYJmsxmerLDeUZh1bvJxcRCO5NYI4aXoQ70eTDA1ZfGMc9TB5X4etAox_ucWQIGdQnE_-Dx9-QSEflwG0JhTBVapy2iT_-ukCg6bDo9e_ojR9_2rn8BwgApjBq6s67UDckczaWF_3OrtOronvC3Tl2OsUNhK-ywOTUxqyusWQGoNS9em25qRXRuAo6o2GAt0yhUIBAKWCW0_dM4eiKnJttjKwkCZtS_rJLlXLNev1ootYOycNkq_NM6BBrzQjplPsxhXlOX4' },
+    { name: 'Pro Runner Sneakers', variant: 'Red · Size 10 · Qty: 1', price: '₹4,999.00', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBacVAPb_4ZPHiuym3FCz5A_RZYoLESVSJXNe-nO4eUqg7fuycfpJd8NsZfMeQRQq7th_GXGJ0bym_doREtWSTe8UZcV-p2n9cIl2-EtlJsRcJkkqISgr-LcJYfmVRf61Pn9lXgV15oM37PaMtTyJBc-XFSsSCY-jIQyesA4meSCS-84Tsh_tA9ZTkMW0aFMJj9ITrNyGIwdjJBjGo8ztuqX5svp9ETpDNTGyBPq1ZoziFgbW3VKoslXQH3IIfRGv-GfGJirj-v9Fo' },
 ]
 
 export default function OrderDetailsPage() {
@@ -100,7 +100,7 @@ export default function OrderDetailsPage() {
                         <div className="bg-white dark:bg-gray-900 rounded-xl border border-slate-200 dark:border-gray-800 p-6 shadow-sm">
                             <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Order Summary</h2>
                             <div className="space-y-3">
-                                {[['Order #', 'ORD-29102'], ['Date', 'Oct 24, 2023'], ['Payment', 'Visa •••• 4242'], ['Subtotal', '$289.98'], ['Shipping', 'Free'], ['Tax', '$23.20'], ['Total', '$313.18']].map(([k, v]) => (
+                                {[['Order #', 'ORD-29102'], ['Date', 'Oct 24, 2023'], ['Payment', 'Visa •••• 4242'], ['Subtotal', '₹19,998.00'], ['Shipping', 'Free'], ['Tax', '₹3,599.64'], ['Total', '₹23,597.64']].map(([k, v]) => (
                                     <div key={k} className={`flex justify-between ${k === 'Total' ? 'border-t border-slate-200 dark:border-gray-800 pt-3 text-base font-bold text-slate-900 dark:text-white' : 'text-sm text-slate-600 dark:text-gray-400'}`}>
                                         <span className={k === 'Total' ? '' : 'text-slate-500 dark:text-gray-500'}>{k}</span>
                                         <span className={k === 'Total' ? 'text-primary' : 'text-slate-900 dark:text-gray-200'}>{v}</span>

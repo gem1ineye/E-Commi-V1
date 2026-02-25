@@ -5,6 +5,7 @@ import { removeFromCart, updateQuantity } from '../store/cartSlice'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import toast from 'react-hot-toast'
+import { formatPrice } from '../utils/formatCurrency'
 
 export default function ShoppingCartPage() {
     const navigate = useNavigate()
@@ -27,8 +28,8 @@ export default function ShoppingCartPage() {
         toast.success('Item removed')
     }
 
-    const shipping = items.length > 0 ? (totalAmount > 50 ? 0 : 10) : 0
-    const tax = +(totalAmount * 0.087).toFixed(2)
+    const shipping = items.length > 0 ? (totalAmount > 500 ? 0 : 100) : 0
+    const tax = +(totalAmount * 0.18).toFixed(2) // Updated to 18% GST for India
     const total = +(totalAmount + shipping + tax).toFixed(2)
 
     return (
@@ -71,7 +72,7 @@ export default function ShoppingCartPage() {
                                             <div className="flex justify-between items-start">
                                                 <div>
                                                     <h3 className="text-lg font-bold text-slate-900 dark:text-white">{item.name}</h3>
-                                                    <p className="mt-1 text-sm text-slate-500 dark:text-gray-400">Unit Price: ${item.price.toFixed(2)}</p>
+                                                    <p className="mt-1 text-sm text-slate-500 dark:text-gray-400">Unit Price: {formatPrice(item.price)}</p>
                                                     <p className={`mt-1 text-xs font-medium flex items-center gap-1 ${item.stock > 0 ? 'text-green-600' : 'text-red-500'}`}>
                                                         <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>
                                                             {item.stock > 0 ? 'check_circle' : 'error'}
@@ -79,7 +80,7 @@ export default function ShoppingCartPage() {
                                                         {item.stock > 0 ? 'In Stock' : 'Out of Stock'}
                                                     </p>
                                                 </div>
-                                                <p className="text-lg font-bold text-slate-900 dark:text-white">${(item.price * item.quantity).toFixed(2)}</p>
+                                                <p className="text-lg font-bold text-slate-900 dark:text-white">{formatPrice(item.price * item.quantity)}</p>
                                             </div>
                                             <div className="mt-auto flex items-center justify-between pt-4">
                                                 <div className="flex items-center border-2 border-slate-100 dark:border-gray-800 rounded-xl overflow-hidden">
@@ -125,17 +126,17 @@ export default function ShoppingCartPage() {
                             <div className="space-y-4 border-b border-slate-100 dark:border-gray-800 pb-6">
                                 <div className="flex justify-between text-slate-600 dark:text-gray-400">
                                     <span>Subtotal</span>
-                                    <span className="font-bold text-slate-900 dark:text-white">${totalAmount.toFixed(2)}</span>
+                                    <span className="font-bold text-slate-900 dark:text-white">{formatPrice(totalAmount)}</span>
                                 </div>
                                 <div className="flex justify-between text-slate-600 dark:text-gray-400">
                                     <span>Shipping</span>
                                     <span className={`font-bold ${shipping === 0 ? 'text-green-600' : 'text-slate-900 dark:text-white'}`}>
-                                        {shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}
+                                        {shipping === 0 ? 'FREE' : formatPrice(shipping)}
                                     </span>
                                 </div>
                                 <div className="flex justify-between text-slate-600 dark:text-gray-400">
-                                    <span>Tax estimate (8.7%)</span>
-                                    <span className="font-bold text-slate-900 dark:text-white">${tax.toFixed(2)}</span>
+                                    <span>Tax estimate (18% GST)</span>
+                                    <span className="font-bold text-slate-900 dark:text-white">{formatPrice(tax)}</span>
                                 </div>
                             </div>
 
@@ -156,7 +157,7 @@ export default function ShoppingCartPage() {
                             <div className="pt-6">
                                 <div className="flex justify-between items-center mb-8">
                                     <span className="text-lg font-bold text-slate-900 dark:text-white">Order Total</span>
-                                    <span className="text-3xl font-black text-primary">${total}</span>
+                                    <span className="text-3xl font-black text-primary">{formatPrice(total)}</span>
                                 </div>
                                 <button
                                     onClick={() => navigate('/checkout')}

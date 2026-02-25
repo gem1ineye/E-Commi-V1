@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import api from '../utils/axiosConfig'
 import toast from 'react-hot-toast'
+import { formatPrice } from '../utils/formatCurrency'
 
 export default function HomePage() {
     const [categories, setCategories] = useState([])
@@ -52,7 +53,7 @@ export default function HomePage() {
                                     Discover Your Next Favorite Product
                                 </h1>
                                 <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-                                    Shop the latest trends with amazing deals. Free shipping on orders over $50!
+                                    Shop the latest trends with amazing deals. Free shipping on orders over ₹500!
                                 </p>
                                 <div className="flex flex-wrap gap-4">
                                     <Link to="/products" className="px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
@@ -204,11 +205,11 @@ export default function HomePage() {
                                             {/* Price */}
                                             <div className="flex items-center gap-2">
                                                 <span className="text-lg font-bold text-slate-900 dark:text-white">
-                                                    ${product.price?.toFixed(2)}
+                                                    {formatPrice(product.price)}
                                                 </span>
                                                 {product.compareAtPrice && product.compareAtPrice > product.price && (
                                                     <span className="text-sm text-gray-400 line-through">
-                                                        ${product.compareAtPrice?.toFixed(2)}
+                                                        {formatPrice(product.compareAtPrice)}
                                                     </span>
                                                 )}
                                             </div>
@@ -231,7 +232,7 @@ export default function HomePage() {
                     <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
                         <div className="grid md:grid-cols-4 gap-8">
                             {[
-                                { icon: 'local_shipping', title: 'Free Shipping', desc: 'On orders over $50' },
+                                { icon: 'local_shipping', title: 'Free Shipping', desc: 'On orders over ₹500' },
                                 { icon: 'verified_user', title: 'Secure Payment', desc: '100% secure transactions' },
                                 { icon: 'autorenew', title: 'Easy Returns', desc: '30-day return policy' },
                                 { icon: 'support_agent', title: '24/7 Support', desc: 'Dedicated customer service' },

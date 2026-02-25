@@ -5,6 +5,7 @@ import { clearCart } from '../store/cartSlice'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import toast from 'react-hot-toast'
+import { formatPrice } from '../utils/formatCurrency'
 
 export default function CheckoutPage() {
     const navigate = useNavigate()
@@ -12,8 +13,8 @@ export default function CheckoutPage() {
     const { items, totalAmount } = useSelector(state => state.cart)
     const [payment, setPayment] = useState('card')
 
-    const shipping = totalAmount > 50 ? 0 : 10
-    const tax = +(totalAmount * 0.087).toFixed(2)
+    const shipping = totalAmount > 500 ? 0 : 100
+    const tax = +(totalAmount * 0.18).toFixed(2)
     const total = +(totalAmount + shipping + tax).toFixed(2)
 
     const handlePlaceOrder = (e) => {
@@ -167,7 +168,7 @@ export default function CheckoutPage() {
                                             <h3 className="font-bold text-slate-900 dark:text-white line-clamp-1">{item.name}</h3>
                                             <div className="flex justify-between items-center mt-1">
                                                 <p className="text-sm text-slate-500">Qty: {item.quantity}</p>
-                                                <p className="font-bold text-slate-900 dark:text-white">${(item.price * item.quantity).toFixed(2)}</p>
+                                                <p className="font-bold text-slate-900 dark:text-white">{formatPrice(item.price * item.quantity)}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -177,21 +178,21 @@ export default function CheckoutPage() {
                             <div className="space-y-4 pt-6 border-t border-slate-100 dark:border-gray-800">
                                 <div className="flex justify-between text-slate-600 dark:text-gray-400">
                                     <span className="font-medium">Subtotal</span>
-                                    <span className="font-bold">${totalAmount.toFixed(2)}</span>
+                                    <span className="font-bold">{formatPrice(totalAmount)}</span>
                                 </div>
                                 <div className="flex justify-between text-slate-600 dark:text-gray-400">
                                     <span className="font-medium">Shipping</span>
                                     <span className={`font-bold ${shipping === 0 ? 'text-green-600 font-black' : ''}`}>
-                                        {shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}
+                                        {shipping === 0 ? 'FREE' : formatPrice(shipping)}
                                     </span>
                                 </div>
                                 <div className="flex justify-between text-slate-600 dark:text-gray-400">
                                     <span className="font-medium">Tax</span>
-                                    <span className="font-bold">${tax.toFixed(2)}</span>
+                                    <span className="font-bold">{formatPrice(tax)}</span>
                                 </div>
                                 <div className="flex justify-between items-center pt-4 border-t border-slate-100 dark:border-gray-800 mt-4">
                                     <span className="text-xl font-bold">Total</span>
-                                    <span className="text-3xl font-black text-primary">${total}</span>
+                                    <span className="text-3xl font-black text-primary">{formatPrice(total)}</span>
                                 </div>
                             </div>
 
